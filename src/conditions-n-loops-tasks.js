@@ -437,7 +437,8 @@ function sortByAsc(startArr) {
     const pivot = arr[Math.floor((low + high) / 2)];
     let i = low - 1;
     let j = high + 1;
-    while (true) {
+    let shouldExit = false;
+    while (!shouldExit) {
       do {
         i += 1;
       } while (arr[i] < pivot);
@@ -445,10 +446,12 @@ function sortByAsc(startArr) {
         j -= 1;
       } while (arr[j] > pivot);
       if (i >= j) {
-        return j;
+        shouldExit = true;
+      } else {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+    return j;
   }
 
   function quickSort(low, high) {
